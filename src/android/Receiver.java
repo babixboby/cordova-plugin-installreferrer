@@ -8,14 +8,14 @@ import android.content.Intent;
 import cordova.plugin.installreferrer.InstallReferrer;
 
 public class Receiver extends BroadcastReceiver {
-  	@Override
-  	public void onReceive(Context context, Intent intent) {
-    	Bundle extras = intent.getExtras();
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		Bundle extras = intent.getExtras();
 
-    	if (extras != null) {
-      		InstallReferrer._referrer = extras.getString("referrer");
-    	} else {
-      		InstallReferrer._referrer = "";
-    	}
-  	}
+		if (extras != null) {
+			InstallReferrer._referrer = extras.getString("referrer");
+		} else {
+			InstallReferrer._referrer = "";
+		}
+	}
 }
