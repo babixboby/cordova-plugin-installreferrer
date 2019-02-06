@@ -1,11 +1,10 @@
 package cordova.plugin.installreferrer;
+import cordova.plugin.installreferrer.InstallReferrer;
 
 import android.os.Bundle;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
-import cordova.plugin.installreferrer.InstallReferrer;
 
 public class Receiver extends BroadcastReceiver {
 	@Override
@@ -18,4 +17,4 @@ public class Receiver extends BroadcastReceiver {
 			InstallReferrer._referrer = "";
 		}
 	}
-}
+} 
