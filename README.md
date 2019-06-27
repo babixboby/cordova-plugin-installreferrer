@@ -25,8 +25,8 @@ import { InstallReferrer } from 'install-referrer';
 
 ...
 
-contructor(private installReferrer: InstallReferrer) {
-  this.installReferrer.getReferrer()
+contructor(private _installReferrer: InstallReferrer) {
+  this._installReferrer.getReferrer()
   .then(data => {
     // data is a array with all parameters received
   })
