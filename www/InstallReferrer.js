@@ -11,14 +11,14 @@ function getReferrer (success, error) {
     	if (ref) {
 			var params = [];
 			if (ref.indexOf("&")) {
-				ref.split('&').map(param => {
-					let key   = param.split('=')[0];
-					let value = param.split('=')[1];
+				ref.split('&').forEach(function(param) {
+					var key   = param.split('=')[0];
+					var value = param.split('=')[1];
 					params[key] = value;
 				});
 			} else {
-				let key = ref.split('=')[0];
-				let value = ref.split('=')[1];
+				var key = ref.split('=')[0];
+				var value = ref.split('=')[1];
 				params[key] = value;
 			}
     		success(params);
