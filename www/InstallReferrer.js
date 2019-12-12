@@ -1,16 +1,17 @@
 var exec = require('cordova/exec');
 
-var getReferer = function() {
-    console.log('AndroidToast instanced');
+var Referer = function() {
+	console.log('Referer instanced');
 };
 
-getReferer.prototype.show = function(onSuccess, onError) {
-    var errorCallback = function(obj) {
-        onError(obj);
-    };
+Referer.prototype.init = function(onSuccess, onError) {
+	var self = this;
+	var errorCallback = function(obj) {
+		onError(obj);
+	};
 
-    var successCallback = function(ref) {
-	    if (ref) {
+	var successCallback = function(ref) {
+		if (ref) {
 			var params = [];
 			if (ref.indexOf("&")) {
 				ref.split('&').forEach(function(param) {
@@ -23,53 +24,17 @@ getReferer.prototype.show = function(onSuccess, onError) {
 				var value = ref.split('=')[1];
 				params[key] = value;
 			}
-    		onSuccess(params);
-    	} else {
-    		setTimeout(function() {
-    			getReferrer(success, error)
-    		}, 500);
-    	}
-        onSuccess(obj);
-    };
+			onSuccess(params);
+		} else {
+			setTimeout(function() {
+				self.init(onSuccess, onError);
+			}, 500);
+		}
+	};
 
-	exec(function(ref) {
-    	
-    }, error, 'InstallReferrer');
-    exec(successCallback, errorCallback, 'AndroidToast', 'show', [msg]);
+	exec(successCallback, errorCallback, 'InstallReferrer');
 };
 
 if (typeof module != 'undefined' && module.exports) {
-    module.exports = getReferer;
+	module.exports = Referer;
 }
-
-function getReferrer (success, error) {
-	if (!success) {
-		return new Promise(function(resolve, reject) {
-			getReferrer(resolve, reject);
-		});
-	}
-
-    exec(function(ref) {
-    	if (ref) {
-			var params = [];
-			if (ref.indexOf("&")) {
-				ref.split('&').forEach(function(param) {
-					var key   = param.split('=')[0];
-					var value = param.split('=')[1];
-					params[key] = value;
-				});
-			} else {
-				var key = ref.split('=')[0];
-				var value = ref.split('=')[1];
-				params[key] = value;
-			}
-    		success(params);
-    	} else {
-    		setTimeout(function() {
-    			getReferrer(success, error)
-    		}, 500);
-    	}
-    }, error, 'InstallReferrer');
-}
-
-exports.getReferrer = getReferrer;
